@@ -1,0 +1,326 @@
+:root{
+  --yellow:#FFEE00; --green:#008800; --red:#EE1100;
+  --text:#0f172a; --muted:#475569; --card:#ffffff; --btn:#e11d48;
+  --ring:0 0 0 3px rgba(225,29,72,.28);
+  --container: min(1200px, 92vw);
+  --gap: clamp(16px, 3vw, 28px);
+}
+
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;
+  color:var(--text)
+}
+
+/* ================= HERO ================= */
+/* Base del hero SIN la bandera; fondo neutro se aplica con .hero--neutral */
+.hero{
+  min-height: calc(var(--vh, 1vh) * 100);
+  position: relative;
+  display:grid;
+  place-items:center;
+  padding: clamp(16px, 2.5vw, 24px);
+  background: transparent; /* sin degradé de bandera */
+}
+.hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background: rgba(0,0,0,.12); /* velo suave por defecto */
+  pointer-events:none;
+}
+
+/* Variante neutra del hero (suave) */
+/* Fondo neutro del hero CON amarillo pastel */
+.hero--neutral{
+  background:
+    radial-gradient(900px 600px at 20% -10%, #fffde2, #fff5b3 60%),
+    #fff7c2;  /* base pastel */
+}
+
+/* Asegura que no se oscurezca con el velo */
+.hero--neutral::after{
+  background: transparent;
+}
+.hero__inner{ position:relative; z-index:1; text-align:center; width:var(--container); margin-inline:auto }
+.note{ font-size:clamp(40px,7vw,90px); line-height:1; filter:drop-shadow(0 3px 10px rgba(0,0,0,.15)); margin-bottom:8px }
+.hero__title{ margin:0 0 10px; font-weight:900; letter-spacing:.3px; font-size:clamp(36px,9vw,96px) }
+.hero__subtitle{ margin:0 auto 18px; max-width:900px; font-size:clamp(16px,2.6vw,28px) }
+
+/* Chips */
+.chips{ display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin:12px 0 26px }
+.chip{ background:rgba(0,0,0,.18); color:#0b0b0b; border:2px solid rgba(0,0,0,.25); border-radius:14px; padding:14px 20px; font-weight:800; backdrop-filter:blur(2px) }
+.chip--outline{ background:rgba(255,255,255,.18); border:2px solid rgba(0,0,0,.35) }
+
+/* Botón */
+.btn{
+  appearance:none; position:relative; display:inline-flex; align-items:center; gap:10px;
+  padding:14px 24px; border-radius:14px; border:1px solid rgba(255,255,255,.25);
+  font-weight:900; color:#fff; text-decoration:none; cursor:pointer; overflow:hidden;
+  transition:transform .08s ease, filter .2s ease, box-shadow .2s ease;
+  box-shadow:0 12px 26px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.btn:hover{ transform:translateY(-1px); filter:brightness(1.04) }
+.btn:focus-visible{ outline:none; box-shadow:var(--ring) }
+.btn__ico{ font-size:1.15em; line-height:1 }
+.btn--presentaciones{ background:var(--btn) }
+.btn .ripple{ position:absolute; border-radius:50%; background:#fff; opacity:.45; transform:translate(-50%,-50%); animation:ripple .6s ease-out; pointer-events:none }
+@keyframes ripple{ from{width:0;height:0;opacity:.5} to{width:650px;height:650px;opacity:0} }
+
+/* ============ Sección informativa (ABOUT) ============ */
+.about{
+  background: radial-gradient(900px 600px at 20% -10%, #fffde7, #fff5c4 55%), #ffffff;
+  padding: clamp(28px, 6vw, 56px) 16px clamp(32px, 6vw, 64px);
+}
+.about__inner{
+  width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr; /* Imagen | Texto (foto primero) */
+  gap: var(--gap);
+  align-items: center;
+}
+/* Garantiza que, si el DOM cambia, la imagen pueda ir primero */
+.about__figure{ margin:0; display:flex; align-items:center; justify-content:center; order:-1; }
+.about__figure img{
+  width:100%;
+  height:auto;
+  max-height: clamp(220px, 38vw, 420px);  /* controla altura sin recortar */
+  object-fit: contain;
+  background:#fff;
+  border-radius:22px;
+  border:1px solid rgba(2,6,23,.08);
+  box-shadow:0 24px 60px rgba(0,0,0,.16);
+}
+.about__figure figcaption{ text-align:center; color:#64748b; font-size:14px; margin-top:8px }
+
+.about__badge{
+  display:inline-block; background:#fff; border:1px solid rgba(2,6,23,.12);
+  color:#0f4210; padding:8px 14px; border-radius:999px; font-weight:800; letter-spacing:.2px;
+  margin-bottom:12px; box-shadow:0 8px 20px rgba(0,0,0,.06);
+}
+.about__title{ margin:0 0 10px; font-weight:900; font-size:clamp(24px,5.2vw,54px) }
+.about__uni{ margin:6px 0 4px; font-size:clamp(16px,2.6vw,28px); color:#1e293b; font-weight:800 }
+.about__teacher{ margin:2px 0 0; font-size:clamp(15px,2.4vw,24px); color:#334155 }
+
+/* Responsivo */
+@media (max-width: 1100px){
+  .about__inner{ grid-template-columns:1fr }
+  .about__text{ text-align:center }
+  .btn{ width:100%; justify-content:center }
+}
+@media (max-width: 640px){
+  .chips{ gap:12px }
+  .chip, .chip--outline{ padding:10px 14px }
+}
+
+/* ============== Botón dentro de cada tile (presentaciones) ============== */
+.tile__actions{
+  display:flex;
+  justify-content:center;
+  margin-top: 10px;
+}
+.btn--small{
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: clamp(14px, 1.8vw, 16px);
+}
+
+/* =================== Presentaciones.HTML =================== */
+.page-presentaciones{
+  background:
+    radial-gradient(900px 600px at 20% 0%, #fffde2, #fff5b3 60%),
+    #fff7c2;
+}
+
+/* Cabecera */
+.presentaciones-hero{
+  text-align:center;
+  padding: 34px 16px 20px;
+}
+.title-gradient{
+  margin: 0 0 6px;
+  font-weight: 900;
+  font-size: clamp(34px, 6.6vw, 72px);
+  background: linear-gradient(90deg, #1b8f11, #7a4f12);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.folder-emoji{ margin-right: .25em; filter: drop-shadow(0 3px 8px rgba(0,0,0,.15)) }
+.presentaciones-subtitle{
+  margin: 6px 0 16px;
+  font-size: clamp(16px, 2.4vw, 26px);
+  color: #64748b;
+}
+
+/* Botón verde regresar */
+.btn--green{
+  background: #178a22;
+  box-shadow: 0 18px 40px rgba(23,138,34,.28), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.back-home{ margin-top: 6px }
+
+/* Galería de carpetas */
+.gallery{
+  max-width: 1400px;
+  margin: 20px auto 60px;
+  padding: 0 24px;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* Tarjeta base */
+.tile{
+  position: relative;
+  padding: min(4.2vw, 34px);
+  border-radius: 22px;
+  border: 4px solid transparent;
+  box-shadow: 0 28px 60px rgba(0,0,0,.12);
+  background: linear-gradient(135deg, rgba(255,255,255,.9), rgba(255,255,255,.7));
+  overflow: hidden;
+}
+.tile::after{
+  content:"";
+  position:absolute; inset:-30% -10% auto -10%;
+  height: 70%;
+  background: radial-gradient(50% 60% at 30% 0%, rgba(0,0,0,.06), transparent 70%);
+  pointer-events:none;
+}
+.tile__title{
+  margin: 14px 0 8px;
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 900;
+  color: #2f2f2f;
+  text-align: center;
+}
+.tile__desc{
+  margin: 0;
+  text-align: center;
+  color: #6b7280;
+  font-size: clamp(15px, 2vw, 22px);
+  line-height: 1.4;
+}
+
+/* Carpeta ilustrada (CSS) */
+.folder{
+  width: 110px; height: 74px;
+  margin: 10px auto 0;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #ffc63a, #f6b21c);
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.45);
+}
+.folder::before{
+  content:"";
+  position:absolute; left: 14px; top: -16px;
+  width: 60px; height: 22px; border-radius: 8px 8px 0 0;
+  background: linear-gradient(180deg, #ffd05a, #ffbf29);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+/* Bordes por color (amarillo, verde, rojo) */
+.tile--yellow{ border-color: #ffd400 }
+.tile--green{  border-color: #199a1d }
+.tile--red{    border-color: #ef2a2a }
+
+/* =================== Índice (slide inicial) =================== */
+.slide{
+  width: var(--container);
+  margin: 0 auto 64px;
+  padding: 0 16px;
+}
+.slide__lead{
+  font-size: clamp(18px, 2.6vw, 28px);
+  line-height: 1.45;
+  text-align: center;
+  margin: 0 0 clamp(18px, 3vw, 28px);
+  color: #0f172a;
+}
+.slide__grid{
+  display: grid;
+  grid-template-columns: 1.1fr 1fr; /* imagen | texto */
+  gap: clamp(16px, 3vw, 28px);
+  align-items: start;
+}
+.slide__figure{
+  margin: 0;
+  background: #fff;
+  border: 1px solid rgba(2,6,23,.08);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.08);
+  padding: clamp(8px, 1.5vw, 12px);
+}
+.slide__figure img{
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+}
+.slide__figure figcaption{
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+  margin-top: 6px;
+}
+.slide__text{
+  background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.88));
+  border: 1px solid rgba(2,6,23,.08);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.08);
+  padding: clamp(16px, 2.4vw, 24px);
+  font-size: clamp(16px, 2.2vw, 22px);
+  line-height: 1.55;
+  color: #0f172a;
+}
+.slide__list{ margin: .4em 0 1em 1.1em; padding: 0; }
+.slide__list li{ margin: .25em 0 }
+@media (max-width: 980px){
+  .slide__grid{ grid-template-columns: 1fr; }
+}
+
+/* =================== Introducción / Panel blanco reutilizable =================== */
+.instruments{
+  width: var(--container, min(1100px, 92vw));
+  margin: 0 auto 72px;
+  padding: 0 16px;
+}
+.inst-grid{
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr);
+  justify-items: center;
+}
+.inst-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.94));
+  border: 1px solid rgba(2,6,23,.08);
+  border-radius: 26px;
+  box-shadow: 0 30px 70px rgba(0,0,0,.14);
+  padding: clamp(16px, 3vw, 28px) clamp(16px, 3.5vw, 40px);
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* Card de resumen: tipografía y ancho cómodos */
+.resume-card .instrument__title{
+  text-align: center;
+  margin: 0 0 10px;
+  font-weight: 900;
+  font-size: clamp(18px, 3vw, 26px);
+  color: #0f172a;
+}
+.resume-card .instrument__text{
+  text-align: left;
+  margin: 0 auto;
+  max-width: 80ch;
+  font-size: clamp(16px, 2.1vw, 18px);
+  line-height: 1.55;
+}
+.resume-list{ margin: 0; padding-left: 1.1em; }
+.resume-list li{ margin: .55em 0; }
+.resume-list strong{ font-weight: 800; }
+
+/* Centrado opcional del header de Índice */
+.presentaciones-hero--center{ text-align: center; }
