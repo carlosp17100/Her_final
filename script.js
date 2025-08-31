@@ -119,7 +119,7 @@ function closeMediaModal(){
   try{ vid.pause(); }catch(_){}
   modal.classList.remove('open');   // cierra con transición
   document.body.style.overflow='auto';
-}
+}})();
 
 
 /* =========================================
