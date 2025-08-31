@@ -547,6 +547,24 @@ body {
 }
 
 /* Centrado opcional del header de Índice */
+<<<<<<< HEAD
 .presentaciones-hero--center {
   text-align: center;
+=======
+.presentaciones-hero--center{ text-align: center; }
+/* abstarct */
+.abstract-card .instrument__title{
+  text-align:center;
+  margin:0 0 10px;
+  font-weight:900;
+  font-size:clamp(18px, 3vw, 26px);
+  color:#0f172a;
+}
+.abstract-card .instrument__text{
+  text-align:left;
+  margin:0 auto;
+  max-width:80ch;
+  font-size:clamp(16px, 2.1vw, 18px);
+  line-height:1.55;
+>>>>>>> feature1
 }
