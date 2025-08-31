@@ -339,3 +339,91 @@ body{
   font-size:clamp(16px, 2.1vw, 18px);
   line-height:1.55;
 }
+/* ===== Origen territorial: tamaños tipográficos uniformes ===== */
+
+/* Título del recuadro (ligeramente grande, pero no excesivo) */
+.map-card .instrument__title{
+  font-size: clamp(22px, 2.6vw, 32px);
+}
+
+/* Frase introductoria bajo el título */
+.map-card .instrument__lead{
+  font-size: clamp(16px, 1.6vw, 20px);
+  line-height: 1.5;
+}
+
+/* Texto de la columna derecha: párrafos y lista -> mismo tamaño */
+.map-card .slide__text{
+  font-size: clamp(16px, 1.6vw, 20px);
+  line-height: 1.55;
+}
+
+/* Ítems de la lista con el mismo tamaño que el párrafo */
+.map-card .slide__list{
+  margin: .5em 0 1em 1.1em;
+}
+.map-card .slide__list li{
+  font-size: inherit;
+  line-height: 1.55;
+  margin: .35em 0;
+}
+.instrument__subtitle{
+  text-align:center;
+  margin: 4px 0 18px;
+  color:#64748b;
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 700;
+}
+
+.music-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2.6vw, 28px);
+}
+
+.music-item{
+  text-align:center;
+}
+
+.music-item__name{
+  margin: 0 0 10px;
+  font-weight: 800;
+  font-size: clamp(16px, 1.8vw, 20px);
+  color:#0f172a;
+}
+
+.music-item__figure{
+  margin: 0 auto 12px;
+  width: min(220px, 90%);
+  aspect-ratio: 3/4; /* orientativo para mantener proporción */
+  display:flex; align-items:center; justify-content:center;
+  background: #fff;
+  border: 1px solid rgba(2,6,23,.08);
+  border-radius: 14px;
+  box-shadow: 0 14px 32px rgba(0,0,0,.08);
+  padding: 10px;
+}
+
+.music-item__figure img{
+  max-width:100%;
+  max-height:100%;
+  object-fit: contain;
+  display:block;
+}
+
+.music-item__text{
+  margin: 0 auto;
+  max-width: 32ch;
+  font-size: clamp(14px, 1.6vw, 16px);
+  line-height: 1.5;
+  color:#334155;
+}
+
+/* Responsive */
+@media (max-width: 1024px){
+  .music-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px){
+  .music-grid{ grid-template-columns: 1fr; }
+  .music-item__figure{ width: min(260px, 100%); }
+}
