@@ -49,14 +49,10 @@ body {
 
 /* Variante neutra del hero (suave) */
 /* Fondo neutro del hero CON amarillo pastel */
-.hero--neutral {
-  background: linear-gradient(
-    to bottom,
-    #fff5c4 0%,      /* amarillo arriba */
-    #ffffff 50%,     /* blanco en el centro */
-    #fff5c4 100%     /* amarillo abajo */
-  );
-  /* base pastel */
+.hero--neutral{
+  background:
+    radial-gradient(900px 600px at 20% -10%, #fffde2, #fff5b3 40%),
+    #fff7c2;  /* base pastel */
 }
 
 /* Asegura que no se oscurezca con el velo */
@@ -560,9 +556,221 @@ body {
   color: #0f172a;
 }
 .abstract-card .instrument__text{
-  text-align: left;
-  margin: 0 auto;
-  max-width: 80ch;
-  font-size: clamp(16px, 2.1vw, 18px);
+  text-align:left;
+  margin:0 auto;
+  max-width:80ch;
+  font-size:clamp(16px, 2.1vw, 18px);
+  line-height:1.55;
+}
+/* ===== Origen territorial: tamaños tipográficos uniformes ===== */
+
+/* Título del recuadro (ligeramente grande, pero no excesivo) */
+.map-card .instrument__title{
+ font-size: clamp(22px, 2.6vw, 32px);
+}
+
+/* Frase introductoria bajo el título */
+.map-card .instrument__lead{
+  font-size: clamp(16px, 1.6vw, 20px);
+  line-height: 1.5;
+}
+
+/* Texto de la columna derecha: párrafos y lista -> mismo tamaño */
+.map-card .slide__text{
+  font-size: clamp(16px, 1.6vw, 20px);
   line-height: 1.55;
+}
+
+/* Ítems de la lista con el mismo tamaño que el párrafo */
+.map-card .slide__list{
+  margin: .5em 0 1em 1.1em;
+}
+.map-card .slide__list li{
+  font-size: inherit;
+  line-height: 1.55;
+  margin: .35em 0;
+}
+.instrument__subtitle{
+  text-align:center;
+  margin: 4px 0 18px;
+  color:#000000;
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 700;
+}
+
+.music-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2.6vw, 28px);
+}
+
+.music-item{
+  text-align:center;
+}
+
+.music-item__name{
+  margin: 0 0 10px;
+  font-weight: 800;
+  font-size: clamp(16px, 1.8vw, 20px);
+  color:#0f172a;
+}
+
+.music-item__figure{
+  margin: 0 auto 12px;
+  width: min(220px, 90%);
+  aspect-ratio: 3/4; /* orientativo para mantener proporción */
+  display:flex; align-items:center; justify-content:center;
+  background: #fff;
+  border: 1px solid rgba(2,6,23,.08);
+  border-radius: 14px;
+  box-shadow: 0 14px 32px rgba(0,0,0,.08);
+  padding: 10px;
+}
+
+.music-item__figure img{
+  max-width:100%;
+  max-height:100%;
+  object-fit: contain;
+  display:block;
+}
+
+.music-item__text{
+  margin: 0 auto;
+  max-width: 32ch;
+  font-size: clamp(14px, 1.6vw, 16px);
+  line-height: 1.5;
+  color:#334155;
+}
+/* -------- Construcción de la Propuesta en Escena -------- */
+.props-card .instrument__title{
+  font-size: clamp(22px, 2.6vw, 32px);
+}
+
+.props-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(16px, 3vw, 28px);
+  margin-top: 14px;
+}
+
+.prop-item__name{
+  text-align:center;
+  font-weight:900;
+  font-size: clamp(18px, 2.6vw, 22px);
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.prop-item__figure{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin: 0 0 10px;
+  background: #fff;
+  border: 1px solid rgba(2,6,23,.08);
+  border-radius: 14px;
+  box-shadow: 0 14px 34px rgba(0,0,0,.08);
+  padding: clamp(8px, 1.6vw, 14px);
+}
+
+.prop-item__figure img{
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  object-fit: contain;
+}
+
+.prop-item__text{
+  margin: 0;
+  font-size: clamp(15px, 2vw, 18px);
+  line-height: 1.45;
+  color: var(--text);
+  text-align: center;
+}
+
+.props-note{
+  margin-top: clamp(12px, 2.4vw, 18px);
+  text-align: center;
+  font-size: clamp(15px, 2vw, 18px);
+}
+/* ---------- Tarjetas: tilt 3D + brillo ---------- */
+.photo-item{
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 50%;
+  --my: 50%;
+  transform: translateY(0) rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.photo-item::after{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(600px circle at var(--mx) var(--my),
+              rgba(255,255,255,.28), transparent 42%);
+  opacity:0; transition:opacity .18s ease; pointer-events:none;
+}
+.photo-item:hover{ box-shadow:0 24px 60px rgba(0,0,0,.18); }
+.photo-item:hover::after{ opacity:1; }
+
+/* --- MODAL con transiciones reales --- */
+.modal{
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,.95);
+  backdrop-filter: blur(8px);
+  cursor: zoom-out;
+
+  /* Estado inicial oculto (animable) */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .28s ease, visibility .28s ease;
+}
+
+/* Abierto */
+.modal.open{
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Entrada suave del contenido */
+.modal-content{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100vw;
+  max-height: 100vh;
+  padding: 2rem;
+
+  transform: scale(.98);
+  opacity: .96;
+  transition: transform .3s ease, opacity .3s ease;
+}
+.modal.open .modal-content{
+  transform: scale(1);
+  opacity: 1;
+}
+
+
+/* Ripple (si quieres ver el efecto de tu JS de ripple) */
+.btn{ position:relative; overflow:hidden; }
+.ripple{
+  position:absolute; width:14px; height:14px; border-radius:50%;
+  background:rgba(255,255,255,.5); transform:translate(-50%,-50%) scale(0);
+  animation:ripple .62s ease;
+}
+@keyframes ripple{ to{ transform:translate(-50%,-50%) scale(18); opacity:0; } }
+
+/* Responsive */
+@media (max-width: 1024px){
+  .music-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px){
+  .music-grid{ grid-template-columns: 1fr; }
+  .music-item__figure{ width: min(260px, 100%); }
 }
