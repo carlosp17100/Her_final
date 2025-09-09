@@ -6,6 +6,33 @@
   <title>Música Tradicional Tolimense</title>
   <link rel="stylesheet" href="styles.css" />
   <script src="script.js" defer></script>
+
+  <!-- Estilos embebidos para la sección QR -->
+  <style>
+    .qr {
+      padding: 2rem;
+      text-align: center;
+      background-color: #fff9c4; /* Fondo amarillo claro igual al de arriba */
+    }
+
+    .qr__title {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .qr__description {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .qr__figure img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
 
@@ -14,7 +41,6 @@
     <div class="about__inner">
       <!-- Foto primero -->
       <figure class="about__figure">
-        <!-- Cambia la ruta si tu archivo tiene otro nombre -->
         <img
           src="umng.png"
           alt="Universidad Militar Nueva Granada"
@@ -28,6 +54,22 @@
         <p class="about__uni">Universidad Militar Nueva Granada</p>
         <p class="about__teacher">Docente: <strong>Diana Marcela Lasso Muñoz</strong></p>
       </div>
+    </div>
+  </section>
+
+  <!-- AHORA: Sección para escanear QR (va antes del HERO) -->
+  <section class="qr">
+    <div class="qr__inner">
+      <h2 class="qr__title">Escanea nuestro código QR</h2>
+      <p class="qr__description">Accede a más información sobre nuestra agrupación.</p>
+      
+      <figure class="qr__figure">
+        <img
+          src="Imágenes/QR.png"
+          alt="Código QR para más información"
+          width="600" height="600"
+          loading="lazy">
+      </figure>
     </div>
   </section>
 
